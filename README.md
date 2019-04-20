@@ -103,15 +103,15 @@ ${DATA_DIR}为数据根目录，${IMGGES_DIR}为图像路径，${ANNOTATIONS_DIR
         --alsologtostderr
 ${PIPELINE_CONFIG_PATH}为xxx.config文件路径，${MODEL_DIR}为检查点保存路径可与xxx.config设置到一起，${NUM_TRAIN_STEPS} 为训练的steps数量  
 $SAMPLE_1_OF_N_EVAL_EXAMPLES一般设置为1，即每个验证集数据都评估<br>
- `trick-限制GPU数`
+ `trick-限制GPU数`  
  （1）将CUDA_VISIBLE_DEVICES=1,置于训练命令前用于选择GPU，1指训练所用的GPU号，或者将如下代码置于model_main.py前  
  
      import os
     os.environ["CUDA_VISIBLE_DEVICES"] = "2"
- （2）定量设置显存，0.7为所占显存比
+ （2）定量设置显存，0.7为所占显存比  
  
      gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
     sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
-将第1行更改为tf.GPUOptions(allow_growth=True)即是按需设置显存
- `trick-进程转入后台` 
- >output.out 2>&1 &可置于训练命令末尾，在服务器中可用于将训练进程转入后台
+将第1行更改为tf.GPUOptions(allow_growth=True)即是按需设置显存  
+ `trick-进程转入后台`   
+ >output.out 2>&1 &可置于训练命令末尾，在服务器中可用于将训练进程转入后台  
