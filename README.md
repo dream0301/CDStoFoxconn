@@ -105,10 +105,10 @@ $SAMPLE_1_OF_N_EVAL_EXAMPLES一般设置为1，即每个验证集数据都评估
 将第1行更改为tf.GPUOptions(allow_growth=True)即是按需设置显存  
  `trick-进程转入后台`   
  >output.out 2>&1 &可置于训练命令末尾，在服务器中可用于将训练进程转入后台  
- ##查看Tensorboard
- ssh -L 6006:127.0.0.1:6006 账号@主机 -p 端口
- \# From tf_models/${MODEL_DIR}为检查点路径
-输入 tensorboard --logdir ${MODEL_DIR}
+ ## 查看Tensorboard  
+ ssh -L 6006:127.0.0.1:6006 账号@主机 -p 端口  
+ \# From tf_models/${MODEL_DIR}为检查点路径  
+输入 tensorboard --logdir ${MODEL_DIR}  
 本地浏览器打开 127.0.0.1:6006/即可观看损失函数变化
  ## 生成模型
  
