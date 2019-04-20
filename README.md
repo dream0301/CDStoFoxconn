@@ -4,7 +4,7 @@
 ## 环境配置
 ### Dependencies
 Tensorflow Object Detection API depends on the following libraries:
-Protobuf 3.0.0（我的protoc-3.4.0-win32.zip，protoc-3.5.0-linux-x86_64.zip，下载地址在[这里](https://github.com/google/protobuf/releases)）；Python-tk；Pillow 1.0；lxml；Jupyter notebook；Matplotlib；Tensorflow (>=1.12.0,低于1.12.0会报错)；Cython；contextlib2；cocoapi
+Protobuf 3.0.0（我的protoc-3.4.0-win32.zip，protoc-3.5.0-linux-x86_64.zip，下载地址在[这里](https://github.com/google/protobuf/releases)）；Python-tk；Pillow 1.0；lxml；Jupyter notebook；Matplotlib；Tensorflow (>=1.12.0,低于1.12.0会报错)；Cython；contextlib2；cocoapi  
 \# For CPU<br>
 pip install tensorflow<br> 
 \# For GPU<br>
@@ -105,3 +105,15 @@ $SAMPLE_1_OF_N_EVAL_EXAMPLES一般设置为1，即每个验证集数据都评估
 将第1行更改为tf.GPUOptions(allow_growth=True)即是按需设置显存  
  `trick-进程转入后台`   
  >output.out 2>&1 &可置于训练命令末尾，在服务器中可用于将训练进程转入后台  
+ ##查看Tensorboard
+ ssh -L 6006:127.0.0.1:6006 账号@主机 -p 端口
+ \# From tf_models/${MODEL_DIR}为检查点路径
+输入 tensorboard --logdir ${MODEL_DIR}
+本地浏览器打开 127.0.0.1:6006/即可观看损失函数变化
+ ## 生成模型
+ 
+     python object_detection/export_inference_graph.py --input_type=${INPUT_TYPE} \
+        --pipeline_config_path=${PIPELINE_CONFIG_PATH} --trained_checkpoint_prefix=${TRAINED_CKPT_PREFIX} \
+        --output_directory=${EXPORT_DIR}
+${INPUT_TYPE} 一般设置为image_tensor， ${PIPELINE_CONFIG_PATH}为xxx.config文件路径，${TRAINED_CKPT_PREFIX}即检查点路径+检查点号，${EXPORT_DIR}为模型输出路径  
+##模型测试
