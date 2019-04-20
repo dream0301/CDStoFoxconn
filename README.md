@@ -4,17 +4,7 @@
 ## 环境配置
 ### Dependencies
 Tensorflow Object Detection API depends on the following libraries:
-* Protobuf 3.0.0（我的protoc-3.4.0-win32.zip，protoc-3.5.0-linux-x86_64.zip，下载地址在[这里](https://github.com/google/protobuf/releases)）  
-* Python-tk  
-* Pillow 1.0  
-* lxml  
-* Jupyter notebook  
-* Matplotlib  
-* Tensorflow (>=1.12.0,低于1.12.0会报错)  
-* Cython  
-* contextlib2  
-* cocoapi
-
+Protobuf 3.0.0（我的protoc-3.4.0-win32.zip，protoc-3.5.0-linux-x86_64.zip，下载地址在[这里](https://github.com/google/protobuf/releases)）；Python-tk；Pillow 1.0；lxml；Jupyter notebook；Matplotlib；Tensorflow (>=1.12.0,低于1.12.0会报错)；Cython；contextlib2；cocoapi
 \# For CPU<br>
 pip install tensorflow<br> 
 \# For GPU<br>
