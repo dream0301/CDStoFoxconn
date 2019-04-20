@@ -14,27 +14,27 @@ Tensorflow Object Detection API depends on the following libraries:
 * Cython  
 * contextlib2  
 * cocoapi  
-\# For CPU
-pip install tensorflow  
-\# For GPU
-pip install tensorflow-gpu
+\# For CPU<br> 
+pip install tensorflow<br> 
+\# For GPU<br> 
+pip install tensorflow-gpu<br> 
 ###COCO API installation
-git clone https://github.com/cocodataset/cocoapi.git  
-cd cocoapi/PythonAPI  
-make  
-cp -r pycocotools /tf_models/
+git clone https://github.com/cocodataset/cocoapi.git<br> 
+cd cocoapi/PythonAPI<br> 
+make<br> 
+cp -r pycocotools /tf_models/<br> 
 ###Protobuf Compilation
-\# From tf_models/
-./bin/protoc object_detection/protos/*.proto --python_out=.  
-如果出错建议采用绝对路径
+\# From tf_models/<br> 
+./bin/protoc object_detection/protos/*.proto --python_out=.<br> 
+如果出错建议采用绝对路径<br> 
 ###Add Libraries to PYTHONPATH
 ###Linux
-\# From tf_models/  
-export PYTHONPATH="$PYTHONPATH:`pwd`:`pwd`/slim"  
-'pwd'为tf_models绝对路径
+\# From tf_models/<br> 
+export PYTHONPATH="$PYTHONPATH:`pwd`:`pwd`/slim"<br> 
+'pwd'为tf_models绝对路径<br> 
 ###windows
 在 ‘此电脑’-‘属性’- ‘高级系统设置’ -‘环境变量’-‘系统变量’ 中新建名为‘PYTHONPATH’的变量，将tf_models及 tf_models/slim 两个文件夹的完整目录添加
-进去
+进去<br> 
 ##Testing the Installation
-python object_detection/builders/model_builder_test.py  
-如果不出错，输出OK即为配置成功  
+python object_detection/builders/model_builder_test.py<br> 
+如果不出错，输出OK即为配置成功<br> 
