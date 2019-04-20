@@ -20,12 +20,13 @@ pip install tensorflow<br>
 \# For GPU<br>
 pip install tensorflow-gpu<br> 
 ### COCO API installation
-    git clone https://github.com/cocodataset/cocoapi.git<br> 
-    cd cocoapi/PythonAPI<br> 
-    make<br> 
-    cp -r pycocotools /tf_models/<br> 
+    git clone https://github.com/cocodataset/cocoapi.git
+    cd cocoapi/PythonAPI
+    make
+    cp -r pycocotools /tf_models/ 
 ### Protobuf Compilation
 \# From tf_models/<br> 
+    
     ./bin/protoc object_detection/protos/*.proto --python_out=.<br> 
 如果出错建议采用绝对路径<br> 
 ### Add Libraries to PYTHONPATH
