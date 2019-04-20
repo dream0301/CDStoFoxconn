@@ -15,9 +15,9 @@ Tensorflow Object Detection API depends on the following libraries:
 * contextlib2  
 * cocoapi
 
-\# For CPU<br> 
+\# For CPU<br>
 pip install tensorflow<br> 
-\# For GPU<br> 
+\# For GPU<br>
 pip install tensorflow-gpu<br> 
 ###COCO API installation
 git clone https://github.com/cocodataset/cocoapi.git<br> 
