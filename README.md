@@ -42,6 +42,46 @@ pip install tensorflow-gpu<br>
     python object_detection/builders/model_builder_test.py<br> 
 如果不出错，输出OK即为配置成功<br> 
 ## 训练集管道配置
+1、新建xxx.pbtxt文件，添加如下内容，注意id从1开始，0留作背景使用，id数为类别数
+\# From tf_models/object_detection/data
+  
+        item {
+          id: 1
+          name: 'aeroplane'
+        }
+        item {
+          id: 2
+          name: 'bicycle'
+        }
+2、 新建xxx.config文件,可从tf_models/object_detection/samples/configs中找到需要的配置文件进行修改
+\# From tf_models/object_detection/XXX
+主要修改如下内容
+
+    num_classes: 2 \#为自己类别数量
+    
+    fine_tune_checkpoint: "object_detection/CHECKPOINT_PATH/model.ckpt"
+    
+    train_input_reader: {
+      tf_record_input_reader {
+        input_path: "object_detection/data/train.record"
+      }
+      label_map_path: "object_deteciton/data/xxx.pbtxt"
+    }
+
+    eval_config: {
+      metrics_set: "coco_detection_metrics"
+      num_examples: 1101
+    }
+
+    eval_input_reader: {
+      tf_record_input_reader {
+        input_path: "object_detection/data/val.record"
+      }
+      label_map_path: "object_deteciton/data/xxx.pbtxt"
+      shuffle: false
+      num_readers: 1
+    }
+CHECKPOINT_PATH为自己的预训练节点路径,num_examples为验证集数量，metrics_set为评价指标  
 ## 数据预处理
 1、利用CSV生成tfrecords  
 （1）、运行check_imgs.py检查图片与CSNV信息准确  
@@ -54,5 +94,24 @@ ${CSV_PATH}为CSV文件路径，${IMGGES_DIR}为图像路径，${OUTPUT_PATH}为
     python dataset_tools/create_disk_tf_record.py --data_dir=${DATA_DIR} --images_dir=${IMGGES_DIR}<br>
     --annotations_dir=${ANNOTATIONS_DIR} --output_path=${OUTPUT_PATH}
 ${DATA_DIR}为数据根目录，${IMGGES_DIR}为图像路径，${ANNOTATIONS_DIR}为XML文件路径，都位于${DATA_DIR}内，${OUTPUT_PATH}为生成得tfrecord文件<br>
-## 
+## 训练
+\# From tf_models/
+
+    python object_detection/model_main.py \
+        --pipeline_config_path=${PIPELINE_CONFIG_PATH} --model_dir=${MODEL_DIR} \
+        --num_train_steps=${NUM_TRAIN_STEPS} \  --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES \
+        --alsologtostderr
+${PIPELINE_CONFIG_PATH}为xxx.config文件路径，${MODEL_DIR}为检查点保存路径可与xxx.config设置到一起，${NUM_TRAIN_STEPS} 为训练的steps数量  
+$SAMPLE_1_OF_N_EVAL_EXAMPLES一般设置为1，即每个验证集数据都评估<br>
+ `trick-限制GPU数`
+ （1）将CUDA_VISIBLE_DEVICES=1,置于训练命令前用于选择GPU，1指训练所用的GPU号，或者将如下代码置于model_main.py前  
  
+     import os
+    os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+ （2）定量设置显存，0.7为所占显存比
+ 
+     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
+    sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+将第1行更改为tf.GPUOptions(allow_growth=True)即是按需设置显存
+ `trick-进程转入后台` 
+ >output.out 2>&1 &可置于训练命令末尾，在服务器中可用于将训练进程转入后台
