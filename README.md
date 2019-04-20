@@ -42,8 +42,8 @@ python object_detection/builders/model_builder_test.py<br>
 ## 训练集管道配置
 ## 数据预处理
 1、利用CSV生成tfrecords
-* 运行check_imgs.py检查图片与CSNV信息准确
-* 运行generate_tfrecord.py 生成tfrecords,命令为：<br>
+（1）、运行check_imgs.py检查图片与CSNV信息准确
+（2）、运行generate_tfrecord.py 生成tfrecords,命令为：<br>
         python generate_tfrecord.py --csv_input=${CSV_PATH}  --image_dir=${IMGGES_DIR}  --output_path=${OUTPUT_PATH}
 ${CSV_PATH}为CSV文件路径，${IMGGES_DIR}为图像路径，${OUTPUT_PATH}为生成得tfrecord文件<br>
 2、利用图像与XML文件生成tfrecord，命令为：  
