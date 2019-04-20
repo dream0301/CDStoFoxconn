@@ -13,7 +13,7 @@ Tensorflow Object Detection API depends on the following libraries:
 * Tensorflow (>=1.12.0,低于1.12.0会报错)  
 * Cython  
 * contextlib2  
-* cocoapi  
+* cocoapi<br>
 \# For CPU<br> 
 pip install tensorflow<br> 
 \# For GPU<br> 
