@@ -3,8 +3,8 @@ import cv2
 import os
 import numpy as np
 
-FOLDER = 'E:\\Tofind_newstar\\dataset_RGB'#图片路径
-CSV_FILE = 'val.csv'#用于获取图片信息
+FOLDER = 'E:\\tf_models_hw\\supernova_dataset\\'#图片路径
+CSV_FILE = 'train.csv'#用于获取图片信息
 
 with open(CSV_FILE, 'r') as fid:
     print('Checking file:', CSV_FILE, 'in folder:', FOLDER)
@@ -28,6 +28,8 @@ with open(CSV_FILE, 'r') as fid:
 
         name, width, height, xmin, ymin, xmax, ymax = row[0], int(row[1]), int(row[2]), int(row[3]), int(row[4]), int(
             row[5]), int(row[6])
+        """
+        #如果不知道图片真实尺寸，需要根据如下代码获取
         path = os.path.join(FOLDER, name+'.jpg')
         img = cv2.imread(path)
 
@@ -35,9 +37,11 @@ with open(CSV_FILE, 'r') as fid:
             error = True
             print('Could not read image', img)
             continue
-
         org_height, org_width = img.shape[:2]
 
+        """
+
+        org_height, org_width = height,width
         if org_width != width:
             error = True
             print('Width mismatch for image: ', name, width, '!=', org_width)
