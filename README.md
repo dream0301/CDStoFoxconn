@@ -59,8 +59,11 @@ pip install tensorflow-gpu<br>
     }
 
     eval_config: {
+      num_examples: 240 #为自己的验证集数量
+      visualize_groundtruth_boxes: true #是否显示真实GT
+      visualization_export_dir:"object_detection/newstar/newstar_eval"#验证集检测结果输出目录
+      num_visualizations:20 #验证可视数量
       metrics_set: "coco_detection_metrics"
-      num_examples: 1101
     }
 
     eval_input_reader: {
