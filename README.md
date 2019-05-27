@@ -106,6 +106,11 @@ $SAMPLE_1_OF_N_EVAL_EXAMPLES一般设置为1，即每个验证集数据都评估
      gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
     sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 将第1行更改为tf.GPUOptions(allow_growth=True)即是按需设置显存  
+（3）更改batch_size，多GPU运行
+在训练命令中增加如下两行,同时可修改config文件中batch_size的数量为num_clones的倍数，即可分布式训练
+    
+    --num_clones=2 \#指定GPU卡的数量。
+    --ps_tasks=1   \#指定参数伺服器的数量。
  `trick-进程转入后台`   
  >output.out 2>&1 &可置于训练命令末尾，在服务器中可用于将训练进程转入后台  
  ## 查看Tensorboard  
