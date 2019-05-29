@@ -17,7 +17,7 @@ pip install tensorflow-gpu<br>
 ### Protobuf Compilation
 \# From tf_models/<br> 
     
-    ./bin/protoc object_detection/protos/*.proto --python_out=.<br> 
+    ./bin/protoc object_detection/protos/*.proto --python_out=. <br> 
 如果出错建议采用绝对路径<br> 
 ### Add Libraries to PYTHONPATH
 #### Linux
