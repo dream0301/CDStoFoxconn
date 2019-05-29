@@ -21,16 +21,16 @@ pip install tensorflow-gpu<br>
 如果出错建议采用绝对路径
 ### Add Libraries to PYTHONPATH
 #### Linux
-\# From tf_models/<br> 
+\# From tf_models/
 
-    export PYTHONPATH="$PYTHONPATH:`pwd`:`pwd`/slim"<br> 
-'pwd'为tf_models绝对路径<br> 
+    export PYTHONPATH="$PYTHONPATH:`pwd`:`pwd`/slim"
+'pwd'为tf_models绝对路径
 #### windows
 在 ‘此电脑’-‘属性’- ‘高级系统设置’ -‘环境变量’-‘系统变量’ 中新建名为‘PYTHONPATH’的变量，将tf_models及 tf_models/slim 两个文件夹的完整目录添加
 进去<br> 
 ## Testing the Installation
-    python object_detection/builders/model_builder_test.py<br> 
-如果不出错，输出OK即为配置成功<br> 
+    python object_detection/builders/model_builder_test.py 
+如果不出错，输出OK即为配置成功
 ## 训练集管道配置
 1、新建xxx.pbtxt文件，添加如下内容，注意id从1开始，0留作背景使用，id数为类别数
 \# From tf_models/object_detection/data
@@ -78,15 +78,15 @@ CHECKPOINT_PATH为自己的预训练节点路径,num_examples为验证集数量�
 ## 数据预处理
 1、利用CSV生成tfrecords  
 （1）、运行check_imgs.py检查图片与CSNV信息准确  
-（2）、运行generate_tfrecord.py 生成tfrecords,命令为：<br>
+（2）、运行generate_tfrecord.py 生成tfrecords,命令为：
 
     python generate_tfrecord.py --csv_input=${CSV_PATH}  --image_dir=${IMGGES_DIR}  --output_path=${OUTPUT_PATH}
-${CSV_PATH}为CSV文件路径，${IMGGES_DIR}为图像路径，${OUTPUT_PATH}为生成得tfrecord文件<br>
+${CSV_PATH}为CSV文件路径，${IMGGES_DIR}为图像路径，${OUTPUT_PATH}为生成得tfrecord文件
 2、利用图像与XML文件生成tfrecord，命令为：  
     
-    python dataset_tools/create_disk_tf_record.py --data_dir=${DATA_DIR} --images_dir=${IMGGES_DIR}<br>
+    python dataset_tools/create_disk_tf_record.py --data_dir=${DATA_DIR} --images_dir=${IMGGES_DIR}
     --annotations_dir=${ANNOTATIONS_DIR} --output_path=${OUTPUT_PATH}
-${DATA_DIR}为数据根目录，${IMGGES_DIR}为图像路径，${ANNOTATIONS_DIR}为XML文件路径，都位于${DATA_DIR}内，${OUTPUT_PATH}为生成得tfrecord文件<br>
+${DATA_DIR}为数据根目录，${IMGGES_DIR}为图像路径，${ANNOTATIONS_DIR}为XML文件路径，都位于${DATA_DIR}内，${OUTPUT_PATH}为生成得tfrecord文件
 ## 训练
 \# From tf_models/
 
